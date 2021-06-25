@@ -1,9 +1,9 @@
 from xml.dom import minidom
 
 # parse an xml file by name
-mydoc = minidom.parse('items.xml')
 
-items = mydoc.getElementsByTagName('esn')
+
+
 
 # one specific item attribute
 # print('Item #2 attribute:')
@@ -34,12 +34,18 @@ def check_if_string_in_file(file_name, string_to_search):
     return False
 
 
-print('\nAll item data:')
-for elem in items:
-    print('found', elem.firstChild.data, ': ', end='')
-    if check_if_string_in_file('lista_sat.txt', elem.firstChild.data):
-        with open('sat_pass.txt', 'a') as apd:
-            apd.write(elem.firstChild.data)
-        print('ok')
-    else:
-        print('not found in list')
+def look_for_esn(file):
+    mydoc = minidom.parse(file)
+    items = mydoc.getElementsByTagName('esn')
+
+    print('\nAll item data:')
+    for elem in items:
+        print('found', elem.firstChild.data, ': ', end='')
+        if check_if_string_in_file('lista_sat.txt', elem.firstChild.data):
+            with open('sat_pass.txt', 'a') as apd:
+                apd.write(elem.firstChild.data)
+                apd.write('\n')
+
+            print('ok')
+        else:
+            print('not found in list')
