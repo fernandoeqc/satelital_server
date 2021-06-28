@@ -48,7 +48,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
 
   
 if __name__ == "__main__":
-    src_path = sys.argv[1] if len(sys.argv) > 1 else '.'
+    src_path = sys.argv[1] if len(sys.argv) > 1 else './folder_target'
     event_handler = Handler()
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=src_path, recursive=True)
